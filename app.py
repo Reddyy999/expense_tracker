@@ -1,0 +1,47 @@
+import streamlit as st
+
+st.set_page_config(
+    page_title="Student Expense Tracker",
+    page_icon="💰",
+    layout="wide"
+)
+
+st.title("💰 Student Expense Tracker")
+
+st.write("Track your daily expenses easily.")
+
+st.divider()
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Monthly Budget", "₹20,000")
+
+with col2:
+    st.metric("Total Spent", "₹0")
+
+with col3:
+    st.metric("Remaining", "₹20,000")
+
+st.divider()
+
+st.subheader("➕ Add New Expense")
+
+category = st.selectbox(
+    "Select Category",
+    ["Food", "Travel", "Shopping", "Education", "Entertainment", "Other"]
+)
+
+amount = st.number_input(
+    "Enter Amount (₹)",
+    min_value=0.0,
+    step=100.0
+)
+
+description = st.text_input("Description")
+
+if st.button("Add Expense"):
+    if amount > 0:
+        st.success(f"Expense added: ₹{amount:.2f} for {category}")
+    else:
+        st.warning("Please enter an amount.")
